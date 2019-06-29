@@ -61,20 +61,33 @@ function timerConfiguration() {
   start.addEventListener('click', () => {
     disableButtonConfiguration(true);
     if (isSession) {
-      sessionInterval = setInterval(() => startTimer(), 1000);
-    } else {
-      breakInterval = setInterval(() => startBreakTimer, 1000);
+      if (!sessionInterval) {
+        sessionInterval = setInterval(() => startTimer(), 1000);
+      }
+    } else if (!breakInterval) {
+      breakInterval = setInterval(() => startBreakTimer(), 1000);
     }
   });
   stop.addEventListener('click', () => {
     if (isSession) {
       clearInterval(sessionInterval);
+      sessionInterval = null;
     } else {
       clearInterval(breakInterval);
+      breakInterval = null;
     }
   });
 
   reset.addEventListener('click', () => {
+    if (isSession) {
+      clearInterval(sessionInterval);
+      sessionInterval = null;
+    } else {
+      clearInterval(breakInterval);
+      breakInterval = null;
+    }
+    breakSecond = 0;
+    sessionInterval = null;
     isSession = true;
     let screenTitle = document.querySelector('.screen-label');
     screenTitle.innerText = 'Session';
