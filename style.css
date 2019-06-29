@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    font-display: auto;
     color: white;
     font-size: 1.5rem;
     text-align: center;
@@ -73,4 +74,15 @@ button:focus {
     border: 6px solid #4acf50;
     margin-bottom: 15px;
     transition: border-color .4s ease-out;
+}
+
+@media only screen and (max-width:500px) {
+    .app-header {
+        font-size: 1.7rem;
+    }
+
+    .screen-result {
+        width: 175px;
+        height: 175px;
+    }
 }
